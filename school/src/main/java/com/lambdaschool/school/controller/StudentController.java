@@ -41,6 +41,14 @@ public class StudentController
     }
 
 
+    @GetMapping(value = "/student/namelike/{name}",
+                produces = {"application/json"})
+    public ResponseEntity<?> getStudentByNameContaining(
+            @PathVariable String name)
+    {
+        List<Student> myStudents = studentService.findStudentByNameLike(name);
+        return new ResponseEntity<>(myStudents, HttpStatus.OK);
+    }
 
 
     @PostMapping(value = "/Student",
@@ -54,7 +62,7 @@ public class StudentController
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{Studentid}").buildAndExpand(newStudent.getStudentid()).toUri();
+        URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{Studentid}").buildAndExpand(newStudent.getStudid()).toUri();
         responseHeaders.setLocation(newStudentURI);
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);

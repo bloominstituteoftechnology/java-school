@@ -46,4 +46,4 @@ INSERT INTO studcourses (studid, courseid)
            (3, 1),
            (3, 6);
 
-alter sequence hibernate_sequence restart with 10;
+alter sequence hibernate_sequence restart with 20;
