@@ -1,0 +1,5 @@
+curl -X GET http://localhost:2019/students/students
+curl -X GET http://localhost:2019/students/{studentid}
+curl -X GET http://localhost:2019/students/namelike/{name}
+curl -X GET http://localhost:2019/students/delete/{id}
+curl -X PUT -H "Content-Type: application/json" -d "{\"name\": \"THIS CHANGES NAME\"}" http://localhost:2019/students/student/{id}
