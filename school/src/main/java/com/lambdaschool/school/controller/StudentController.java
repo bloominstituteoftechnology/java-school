@@ -1,11 +1,9 @@
 package com.lambdaschool.school.controller;
 
+import com.lambdaschool.school.model.ErrorDetail;
 import com.lambdaschool.school.model.Student;
 import com.lambdaschool.school.service.StudentService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -45,6 +43,10 @@ public class StudentController
     }
 
     @ApiOperation(value = "Return student with given Student ID", response = Student.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully found student", response = Student.class),
+            @ApiResponse(code = 404, message = "Could not find student", response = ErrorDetail.class)
+    })
     @GetMapping(value = "/Student/{StudentId}",
                 produces = {"application/json"})
     public ResponseEntity<?> getStudentById(@ApiParam(value = "Student ID", required = true, example = "1")
@@ -56,6 +58,10 @@ public class StudentController
     }
 
     @ApiOperation(value = "Return students with a name containing entry", response = Student.class, responseContainer = "List")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Sucessfully found students in given parameters", response = Student.class, responseContainer = "List"),
+            @ApiResponse(code = 500, message = "An Error occurred while locating students", response = ErrorDetail.class)
+    })
     @GetMapping(value = "/student/namelike/{name}",
                 produces = {"application/json"})
     public ResponseEntity<?> getStudentByNameContaining(@ApiParam(value = "Student name Substring", required = true, example = "Jo")
@@ -66,6 +72,10 @@ public class StudentController
     }
 
     @ApiOperation(value = "Create a new student", notes = "URL for new student will be in location header", response = void.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully created student", response = void.class),
+            @ApiResponse(code = 500, message = "Failed to create student", response = ErrorDetail.class)
+    })
     @PostMapping(value = "/Student",
                  consumes = {"application/json"},
                  produces = {"application/json"})
@@ -84,6 +94,10 @@ public class StudentController
     }
 
     @ApiOperation(value = "Update a current student", response = void.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully updated student", response = void.class),
+            @ApiResponse(code = 500, message = "Failed to update student", response = ErrorDetail.class)
+    })
     @PutMapping(value = "/Student/{Studentid}")
     public ResponseEntity<?> updateStudent(
             @RequestBody
@@ -97,6 +111,10 @@ public class StudentController
     }
 
     @ApiOperation(value = "Delete a current student", response = void.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Succesfully deleted student", response = void.class),
+            @ApiResponse(code = 500, message = "Failed to delete student", response = ErrorDetail.class)
+    })
     @DeleteMapping("/Student/{Studentid}")
     public ResponseEntity<?> deleteStudentById(@ApiParam(value = "Student ID", required = true)
             @PathVariable
