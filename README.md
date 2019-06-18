@@ -14,7 +14,9 @@ Start with the school project.
 
 * Add custom Swagger documentation to all of the endpoints in StudentController. Make sure that Swagger doucment for the other the endpoints in other controller default to something useful. 
 
+* Add custom Swagger documentation to each of the models - course, student, instructor.
+
 ## Stretch Goals
 
-* Add the ability to assign students to courses. Think about using a custom query for this.
+* Add the ability to assign existing students to existing courses. Use a custom query for this.
 * Add Swagger Documentation to the endpoint that adds students to courses.
