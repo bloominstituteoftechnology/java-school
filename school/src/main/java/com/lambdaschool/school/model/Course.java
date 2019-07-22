@@ -12,16 +12,13 @@ public class Course
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @JsonView(View.CoursesOnly.class)
     private long courseid;
 
-//    @JsonView(View.CoursesOnly.class)
     private String coursename;
 
     @ManyToOne
     @JoinColumn(name = "instructid")
     @JsonIgnoreProperties("courses")
-//    @JsonView(View.CoursesOnly.class)
     private Instructor instructor;
 
     @ManyToMany(mappedBy = "courses")
