@@ -1,4 +1,4 @@
-# Project School Test
+# Project School
 
 A student that completes this project shows that they can:
 
