@@ -1,5 +1,6 @@
 package com.lambdaschool.school.service;
 
+import com.lambdaschool.school.exceptions.ResourceNotFoundException;
 import com.lambdaschool.school.model.Course;
 import com.lambdaschool.school.repository.CourseRepository;
 import com.lambdaschool.school.view.CountStudentsInCourses;
@@ -32,7 +33,7 @@ public class CourseServiceImpl implements CourseService
 
     @Transactional
     @Override
-    public void delete(long id) throws EntityNotFoundException
+    public void delete(long id) throws ResourceNotFoundException
     {
         if (courserepos.findById(id).isPresent())
         {
@@ -40,7 +41,7 @@ public class CourseServiceImpl implements CourseService
             courserepos.deleteById(id);
         } else
         {
-            throw new EntityNotFoundException(Long.toString(id));
+            throw new ResourceNotFoundException(Long.toString(id));
         }
     }
 }
