@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController
 {
+
     @Autowired
     private StudentService studentService;
 
@@ -26,6 +27,7 @@ public class StudentController
     @GetMapping(value = "/students", produces = {"application/json"})
     public ResponseEntity<?> listAllStudents()
     {
+
         List<Student> myStudents = studentService.findAll();
         return new ResponseEntity<>(myStudents, HttpStatus.OK);
     }
@@ -36,6 +38,8 @@ public class StudentController
             @PathVariable
                     Long StudentId)
     {
+
+
         Student r = studentService.findStudentById(StudentId);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
