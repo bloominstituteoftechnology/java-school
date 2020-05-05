@@ -1,0 +1,7 @@
+com.lambdaschool.schools
+com.lambdaschool.schools.config
+com.lambdaschool.schools.controllers
+com.lambdaschool.schools.models
+com.lambdaschool.schools.repositories
+com.lambdaschool.schools.services
+com.lambdaschool.schools.views
