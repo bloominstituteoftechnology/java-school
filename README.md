@@ -562,9 +562,9 @@ After completing the project using the provided seed data, a successful applicat
 }
 ```
 
-### Stretch Goals
-
 </details>
+
+### Stretch Goals
 
 <details>
 <summary>http://localhost:2019/instructors/instructor/3/advice</summary>
