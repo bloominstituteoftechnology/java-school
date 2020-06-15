@@ -562,6 +562,8 @@ After completing the project using the provided seed data, a successful applicat
 }
 ```
 
+### Stretch Goals
+
 </details>
 
 <details>
@@ -617,8 +619,6 @@ After completing the project using the provided seed data, a successful applicat
 </details>
 
 [Swagger for School API](https://drive.google.com/open?id=1Xl542CN81taBcMM9dPo5KnscaRa1ZnUi)
-
-### Stretch Goals
 
 Expand the endpoint to see a sample instructor with advice about dogs
   
@@ -737,6 +737,8 @@ Add Validations
       * [ ] Maximum 30 characters
   * [ ] Each validation should report an appropriate exception message if violated
 
+### Stretch Goal
+
 Get Data from External API
 
 * [ ] Create an endpoint **/instructors/instructor/{instructorid}/advice** that returns the instructor's information plus random advice from an external API.
@@ -809,8 +811,6 @@ Custom Swagger Documentation
   * [ ] All fields in the Courses model
   * [ ] All the validations added above should be documented in Swagger
   * [ ] Swagger API-Information should point to your information
-
-### Stretch Goal
 
 Use a search term for the advice
 
