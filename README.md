@@ -2,6 +2,12 @@
 
 A student that completes this project shows that they can:
 
+* implement industry-standard exception handling including user-friendly exception messages
+* implement exception handling using a variety of Java constructs
+* use data validation annotations to verify data prior to processing the data
+* implement custom Swagger Documentation
+* gather and use data from other APIs
+
 ## Introduction
 
 This is a standard database scheme with courses, students, and instructors. This Java Spring REST API application will provide endpoints for clients to perform the various CRUD operations on data sets contained in the application's data.
