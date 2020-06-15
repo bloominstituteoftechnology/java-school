@@ -717,6 +717,8 @@ Add appropriate exception handling routines.
   * **developer** -  message for developers about this error message, things like class and code causing the error
   * **List of Validation Errors** - If data validation errors caused this error, the list of them will appear here
 
+### Stretch Goal
+
 Add Validations
 
 * [ ] Add the following validations to your code
@@ -736,8 +738,6 @@ Add Validations
       * [ ] Minimum 2 characters
       * [ ] Maximum 30 characters
   * [ ] Each validation should report an appropriate exception message if violated
-
-### Stretch Goal
 
 Get Data from External API
 
