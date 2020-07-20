@@ -46,4 +46,10 @@ INSERT INTO studcourses (studentid, courseid, created_by, created_date, last_mod
            (3, 1, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
            (3, 6, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
 
+/*
+We must tell hibernate the ids that have already been used.
+The number must be larger than the last used id.
+20 > 13 so we are good!
+ */
+
 alter sequence hibernate_sequence restart with 20;
