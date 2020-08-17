@@ -1,7 +1,5 @@
 package com.lambdaschool.schools.controllers;
 
-import com.lambdaschool.schools.models.Course;
-import com.lambdaschool.schools.services.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
