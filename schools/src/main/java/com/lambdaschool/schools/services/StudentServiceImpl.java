@@ -72,14 +72,6 @@ public class StudentServiceImpl
             Student oldStudent = studentrepos.findById(student.getStudentid())
                 .orElseThrow(() -> new EntityNotFoundException("Student id " + student.getStudentid() + " not found!"));
 
-            // delete the courses for the old student we are replacing
-            for (StudCourses ur : oldStudent.getCourses())
-            {
-                coursesService.deleteStudentCourse(ur.getStudent()
-                        .getStudentid(),
-                    ur.getCourse()
-                        .getCourseid());
-            }
             newStudent.setStudentid(student.getStudentid());
         }
 
@@ -87,23 +79,14 @@ public class StudentServiceImpl
 
         newStudent.getCourses()
             .clear();
-        if (student.getStudentid() == 0)
-        {
             for (StudCourses sc : student.getCourses())
             {
                 Course newCourse = coursesService.findCourseById(sc.getCourse()
                     .getCourseid());
 
-                newCourse.addStudent(newStudent);
+                newStudent.getCourses().add(new StudCourses(newCourse, newStudent))
+                ;
             }
-        } else
-        {
-            // add the new courses for the students we are replacing
-            for (StudCourses sc : student.getCourses())
-            {
-                coursesService.addStudCourses(newStudent.getStudentid(), sc.getCourse().getCourseid());
-            }
-        }
 
         return studentrepos.save(newStudent);
     }

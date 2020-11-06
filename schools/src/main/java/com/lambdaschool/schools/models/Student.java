@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The Entity allowing interaction with the students table
@@ -43,7 +45,7 @@ public class Student
         cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "student",
         allowSetters = true)
-    private List<StudCourses> courses = new ArrayList<>();
+    private Set<StudCourses> courses = new HashSet<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -97,7 +99,7 @@ public class Student
      *
      * @return list of student courses combinations associated with this student
      */
-    public List<StudCourses> getCourses()
+    public Set<StudCourses> getCourses()
     {
         return courses;
     }
@@ -107,7 +109,7 @@ public class Student
      *
      * @param courses the new list of student courses combinations associated with this student
      */
-    public void setCourses(List<StudCourses> courses)
+    public void setCourses(Set<StudCourses> courses)
     {
         this.courses = courses;
     }

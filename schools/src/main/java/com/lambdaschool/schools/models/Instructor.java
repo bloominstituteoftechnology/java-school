@@ -41,7 +41,7 @@ public class Instructor
     @OneToMany(mappedBy = "instructor",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-    @JsonIgnoreProperties("instructor")
+    @JsonIgnoreProperties(value = "instructor", allowSetters = true)
     private List<Course> courses = new ArrayList<>();
 
     /**

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,14 +81,6 @@ public class CoursesServiceImpl
             Course oldCourse = courserepos.findById(course.getCourseid())
                 .orElseThrow(() -> new EntityNotFoundException("Course id " + course.getCourseid() + " not found!"));
 
-            // delete the students for the old course we are replacing
-            for (StudCourses ur : oldCourse.getStudents())
-            {
-                deleteStudentCourse(ur.getStudent()
-                        .getStudentid(),
-                    ur.getCourse()
-                        .getCourseid());
-            }
             newCourse.setCourseid(course.getCourseid());
         }
 
@@ -102,75 +93,16 @@ public class CoursesServiceImpl
 
         newCourse.getStudents()
             .clear();
-        if (course.getCourseid() == 0)
+        for (StudCourses sc : course.getStudents())
         {
-            for (StudCourses sc : course.getStudents())
-            {
-                Student newStudent = studentrepos.findById(sc.getStudent()
-                    .getStudentid())
-                    .orElseThrow(() -> new EntityNotFoundException("Instructor id " + sc.getStudent()
-                        .getStudentid() + " not found!"));
+            Student newStudent = studentrepos.findById(sc.getStudent()
+                .getStudentid())
+                .orElseThrow(() -> new EntityNotFoundException("Instructor id " + sc.getStudent()
+                    .getStudentid() + " not found!"));
 
-                newCourse.addStudent(newStudent);
-            }
-        } else
-        {
-            // add the new students for the course we are replacing
-            for (StudCourses sc : course.getStudents())
-            {
-                addStudCourses(sc.getStudent()
-                    .getStudentid(), newCourse.getCourseid());
-            }
+            newCourse.getStudents().add(new StudCourses(newCourse, newStudent));
         }
 
         return courserepos.save(newCourse);
     }
-
-    @Transactional
-    @Override
-    public void deleteStudentCourse(
-        long studentid,
-        long courseid)
-    {
-        studentrepos.findById(studentid)
-            .orElseThrow(() -> new EntityNotFoundException("Student id " + studentid + " not found!"));
-        courserepos.findById(courseid)
-            .orElseThrow(() -> new EntityNotFoundException("Course id " + courseid + " not found!"));
-
-        if (courserepos.checkStudentCourseCombo(studentid,
-            courseid)
-            .getCount() > 0)
-        {
-            courserepos.deleteStudentCourse(studentid,
-                courseid);
-        } else
-        {
-            throw new EntityNotFoundException("Student and Course Combination Does Not Exists");
-        }
-    }
-
-    @Transactional
-    @Override
-    public void addStudCourses(
-        long studentid,
-        long courseid)
-    {
-        studentrepos.findById(studentid)
-            .orElseThrow(() -> new EntityNotFoundException("Student id " + studentid + " not found!"));
-        courserepos.findById(courseid)
-            .orElseThrow(() -> new EntityNotFoundException("Course id " + courseid + " not found!"));
-
-        if (courserepos.checkStudentCourseCombo(studentid,
-            courseid)
-            .getCount() <= 0)
-        {
-            courserepos.insertStudCourses("SYSTEM",
-                studentid,
-                courseid);
-        } else
-        {
-            throw new EntityExistsException("Student and Course Combination Already Exists");
-        }
-    }
-
 }

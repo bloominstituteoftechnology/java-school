@@ -40,24 +40,4 @@ public interface CoursesService
      * @return the saved course object including any automatically generated fields
      */
     Course save(Course course);
-
-    /**
-     * Delete a student's enrollment in a course
-     *
-     * @param studentid the student id of the student to unenroll
-     * @param courseid the course id of the course the student is unenrolling
-     */
-    void deleteStudentCourse(
-        long studentid,
-        long courseid);
-
-    /**
-     * Enroll a student in a course
-     *
-     * @param studentid the student id of the student to enroll
-     * @param courseid the course id of the course where the student wishes to enroll
-     */
-    public void addStudCourses(
-        long studentid,
-        long courseid);
 }

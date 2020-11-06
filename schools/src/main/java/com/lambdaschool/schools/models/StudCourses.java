@@ -2,13 +2,8 @@ package com.lambdaschool.schools.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * The entity allowing interaction with the studcourses table.
@@ -16,6 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "studcourses")
+@IdClass(StudCoursesId.class)
 public class StudCourses
     extends Auditable
     implements Serializable
@@ -108,13 +104,13 @@ public class StudCourses
             return false;
         }
         StudCourses that = (StudCourses) o;
-        return getCourse().equals(that.getCourse()) &&
-            getStudent().equals(that.getStudent());
+        return ((this.student == null) ? 0 : this.student.getStudentid()) == ((that.student == null) ? 0 : that.student.getStudentid()) &&
+            ((this.course == null) ? 0 : this.course.getCourseid()) == ((that.course == null) ? 0 : that.course.getCourseid());
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(getCourse(), getStudent());
+        return 37;
     }
 }

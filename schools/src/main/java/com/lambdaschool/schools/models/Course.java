@@ -13,7 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -59,7 +61,7 @@ public class Course
         cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "course",
         allowSetters = true)
-    private List<StudCourses> students = new ArrayList<>();
+    private Set<StudCourses> students = new HashSet<>();
 
     /**
      * Getter for primary key of this course
@@ -106,7 +108,7 @@ public class Course
      *
      * @return A list of course student combinations for this course
      */
-    public List<StudCourses> getStudents()
+    public Set<StudCourses> getStudents()
     {
         return students;
     }
@@ -116,7 +118,7 @@ public class Course
      *
      * @param students A new list of course student combinations associated with course
      */
-    public void setStudents(List<StudCourses> students)
+    public void setStudents(Set<StudCourses> students)
     {
         this.students = students;
     }
@@ -139,17 +141,5 @@ public class Course
     public void setInstructor(Instructor instructor)
     {
         this.instructor = instructor;
-    }
-
-    /**
-     * Add student to this course
-     *
-     * @param student the new student (Student) to add
-     */
-    public void addStudent(
-        Student student)
-    {
-        students.add(new StudCourses(this,
-            student));
     }
 }
