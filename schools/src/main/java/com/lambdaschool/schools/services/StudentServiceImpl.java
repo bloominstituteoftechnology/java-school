@@ -79,14 +79,16 @@ public class StudentServiceImpl
 
         newStudent.getCourses()
             .clear();
-            for (StudCourses sc : student.getCourses())
-            {
-                Course newCourse = coursesService.findCourseById(sc.getCourse()
-                    .getCourseid());
+        for (StudCourses sc : student.getCourses())
+        {
+            Course newCourse = coursesService.findCourseById(sc.getCourse()
+                .getCourseid());
 
-                newStudent.getCourses().add(new StudCourses(newCourse, newStudent))
-                ;
-            }
+            newStudent.getCourses()
+                .add(new StudCourses(newCourse,
+                    newStudent))
+            ;
+        }
 
         return studentrepos.save(newStudent);
     }

@@ -100,7 +100,9 @@ public class CoursesServiceImpl
                 .orElseThrow(() -> new EntityNotFoundException("Instructor id " + sc.getStudent()
                     .getStudentid() + " not found!"));
 
-            newCourse.getStudents().add(new StudCourses(newCourse, newStudent));
+            newCourse.getStudents()
+                .add(new StudCourses(newCourse,
+                    newStudent));
         }
 
         return courserepos.save(newCourse);
