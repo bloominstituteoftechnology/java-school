@@ -748,7 +748,7 @@ Add Validations
 Get Data from External API
 
 * [ ] Create an endpoint **/instructors/instructor/{instructorid}/advice** that returns the instructor's information plus random advice from an external API.
-  * [ ] The route of the external API is [http://api.adviceslip.com/advice](http://api.adviceslip.com/advice) and yields the JSON Object
+  * [ ] The route of the external API is [https://api.adviceslip.com/advice](https://api.adviceslip.com/advice) and yields the JSON Object
 
   ```JSON
   {
@@ -822,7 +822,7 @@ Use a search term for the advice
 
 * [ ] Create an endpoint **/instructors/instructor/{instructorid}/advice/{search term}** that returns the instructor's information plus advice based off of the search term from an external API.
 
-The route of the external API is [http://api.adviceslip.com/advice/search/dog](http://api.adviceslip.com/advice/search/dog) and yields the JSON Object
+The route of the external API is [https://api.adviceslip.com/advice/search/dog](https://api.adviceslip.com/advice/search/dog) and yields the JSON Object
 
   ```JSON
   {
