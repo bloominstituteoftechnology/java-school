@@ -69,6 +69,17 @@ public class StudentController
             HttpStatus.OK);
     }
 
+    @GetMapping(value = "/students/{studentName}",
+        produces = {"application/json"})
+    public ResponseEntity<?> getStudentByName(
+        @PathVariable
+            Long studentName)
+    {
+        Student u = studentService.findStudentByName(studentName);
+        return new ResponseEntity<>(u,
+            HttpStatus.OK);
+    }
+
     /**
      * Given a complete student Object, create a new student record and student course records.
      * <br> Example: <a href="http://localhost:2019/students/student">http://localhost:2019/students/student</a>
