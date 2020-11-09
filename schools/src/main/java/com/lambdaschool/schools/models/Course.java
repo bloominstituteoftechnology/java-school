@@ -47,7 +47,8 @@ public class Course
      * connects course to a course student combination
      */
     @OneToMany(mappedBy = "course",
-        cascade = CascadeType.ALL)
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
     @JsonIgnoreProperties(value = "course",
         allowSetters = true)
     private Set<StudCourses> students = new HashSet<>();
