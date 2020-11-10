@@ -19,6 +19,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Component
 public class CustomErrorDetails extends DefaultErrorAttributes {
     @Autowired
     HelperFunctions helperFunctions;

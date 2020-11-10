@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service(value = "helperFunctions")
-public class HelpFunctionsImpl implements HelperFunctions {
+public class HelperFunctionsImpl implements HelperFunctions {
     @Override
     public List<ValidationError> getConstraintViolations(Throwable cause) {
         List<ValidationError> listVE = new ArrayList<>();
