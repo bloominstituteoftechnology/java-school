@@ -34,6 +34,7 @@ public class CustomErrorDetails extends DefaultErrorAttributes {
         errorDetails.put("details", errorAttributes.get("message"));
         errorDetails.put("timestamp", errorAttributes.get("timestamp"));
         errorDetails.put("developerMessage", "path: " + errorAttributes.get("path"));
+        errorDetails.put("errors", helperFunctions.getConstraintViolations(this.getError(webRequest)));
 
         return errorDetails;
     }
