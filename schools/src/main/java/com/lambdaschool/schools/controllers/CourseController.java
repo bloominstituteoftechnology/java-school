@@ -1,7 +1,12 @@
 package com.lambdaschool.schools.controllers;
 
 import com.lambdaschool.schools.models.Course;
+import com.lambdaschool.schools.models.ErrorDetails;
 import com.lambdaschool.schools.services.CoursesService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,13 +39,9 @@ public class CourseController
     @Autowired
     private CoursesService coursesService;
 
-    /**
-     * Returns a list of all courses
-     * <br>Example: <a href="http://localhost:2019/courses/courses">http://localhost:2019/courses/courses</a>
-     *
-     * @return JSON list of all courses with a status of OK
-     * @see CoursesService#findAll() CoursesService.findAll()
-     */
+    @ApiOperation(value = "returns all Courses",
+        response = Course.class,
+        responseContainer = "List")
     @GetMapping(value = "/courses",
         produces = {"application/json"})
     public ResponseEntity<?> listAllCourses()
@@ -50,14 +51,13 @@ public class CourseController
             HttpStatus.OK);
     }
 
-    /**
-     * Returns a single course based off a course id number
-     * <br>Example: <a href="http://localhost:2019/courses/course/7">http://localhost:2019/courses/course/7</a>
-     *
-     * @param courseId The primary key of the course you seek
-     * @return JSON object of the course you seek
-     * @see CoursesService#findCourseById(long) CoursesService.findCourseById(long)
-     */
+    @ApiOperation(value = "Retrieve a course based off of the id",
+        response = Course.class)
+    @ApiResponses(value = {@ApiResponse(code = 200,
+        message = "Course Found",
+        response = Course.class), @ApiResponse(code = 404,
+        message = "Course Not Found",
+        response = ErrorDetails.class)})
     @GetMapping(value = "/course/{courseId}",
         produces = {"application/json"})
     public ResponseEntity<?> getCourseById(
@@ -115,6 +115,13 @@ public class CourseController
      * @return status of OK
      * @see CoursesService#save(Course) CoursesService.save(Course)
      */
+    @ApiOperation(value = "updates a course given in the request body",
+        response = Void.class)
+    @ApiResponses(value = {@ApiResponse(code = 200,
+        message = "Course Found",
+        response = Void.class), @ApiResponse(code = 404,
+        message = "Course Not Found",
+        response = ErrorDetails.class)})
     @PutMapping(value = "/course/{courseid}",
         consumes = {"application/json"})
     public ResponseEntity<?> updateFullCourse(
@@ -130,14 +137,6 @@ public class CourseController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**
-     * Deletes a given course along with associated student course enrollments
-     * <br>Example: <a href="http://localhost:2019/courses/course/14">http://localhost:2019/courses/courses/14</a>
-     *
-     * @param id the primary key of the course you wish to delete
-     * @return Status of OK
-     * @see CoursesService#delete(long) CoursesService.delete(long)
-     */
     @DeleteMapping(value = "/course/{id}")
     public ResponseEntity<?> deleteCourseById(
         @PathVariable

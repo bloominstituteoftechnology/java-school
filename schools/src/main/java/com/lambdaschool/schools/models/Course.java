@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * The entity allowing interaction with the courses table
- */
 @ApiModel(value = "Course",
     description = "This is the course record")
 @Entity
