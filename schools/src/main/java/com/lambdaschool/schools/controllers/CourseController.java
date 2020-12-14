@@ -26,16 +26,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-/**
- * The entry point for clients to work primary with courses
- */
 @RestController
 @RequestMapping(value = "/courses")
 public class CourseController
 {
-    /**
-     * Using the Courses service to process Course data
-     */
     @Autowired
     private CoursesService coursesService;
 
@@ -69,17 +63,6 @@ public class CourseController
             HttpStatus.OK);
     }
 
-    /**
-     * Given a complete Course Object, create a new Course record and student course records.
-     * <br> Example: <a href="http://localhost:2019/courses/course">http://localhost:2019/courses/course</a>
-     *
-     * @param newcourse A complete new course to add including instructor and students.
-     *                  instructor must already exist.
-     *                  students must already exist.
-     * @return A location header with the URI to the newly created course and a status of CREATED
-     * @throws URISyntaxException Exception if something does not work in creating the location header
-     * @see CoursesService#save(Course) CoursesService.save(Course)
-     */
     @PostMapping(value = "/course",
         consumes = {"application/json"})
     public ResponseEntity<?> addCourse(
@@ -104,17 +87,6 @@ public class CourseController
             HttpStatus.CREATED);
     }
 
-    /**
-     * Given a complete Course Object
-     * Given the course id, primary key, is in the Course table,
-     * replace the Course record, student course combinations.
-     * <br> Example: <a href="http://localhost:2019/courses/course/15">http://localhost:2019/courses/course/15</a>
-     *
-     * @param updateCourse A complete Course including all students. Students and Instructor must already exist.
-     * @param courseid     The primary key of the course you wish to replace.
-     * @return status of OK
-     * @see CoursesService#save(Course) CoursesService.save(Course)
-     */
     @ApiOperation(value = "updates a course given in the request body",
         response = Void.class)
     @ApiResponses(value = {@ApiResponse(code = 200,
