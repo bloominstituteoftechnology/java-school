@@ -1,17 +1,10 @@
 package com.lambdaschool.schools.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,31 +12,38 @@ import java.util.List;
 /**
  * The entity allowing interaction with the courses table
  */
+@ApiModel(value = "Course",
+    description = "This is the course record")
 @Entity
 @Table(name = "courses")
-public class Course
-    extends Auditable
+@JsonIgnoreProperties(value = {"hasinstructorforcourse"})
+public class Course extends Auditable
 {
-    /**
-     * Primary key (long) for this course
-     */
+    @ApiModelProperty(name = "course id",
+        value = "primary key for course",
+        required = true,
+        example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long courseid;
 
-    /**
-     * Name (String) of this Course. Cannot be null and must be unique
-     */
+    @ApiModelProperty(name = "course name",
+        value = "full course name",
+        required = true,
+        example = "Physics 101")
     @Column(nullable = true,
         unique = true)
     private String coursename;
 
-    /**
-     * The instructor object (Instructor) of this course
-     * <br>
-     * Forms a Many to one relationship between course and instructor.
-     * An instructor has many courses!
-     */
+    @Transient
+    public boolean hasinstructorforcourse = false;
+
+    @ApiModelProperty(name = "course name",
+        value = "instructor of course",
+        require = false,
+        example = "")
+    private String instructor;
+
     @ManyToOne
     @JoinColumn(name = "instructorid",
         nullable = false)
