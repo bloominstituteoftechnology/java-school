@@ -20,10 +20,10 @@ You are creating a Java Spring REST API server which stores data in an H2 databa
 
 All tables contain the following auditing fields
 
-created_by - user name who created the row. Should default to SYSTEM
-created_date - date field when the row was created
-last_modified_by - user name who last changed data in the row. Should default to SYSTEM
-last_modified_date - date field when the data in the row was last changed
+* **created_by** - user name who created the row. Should default to SYSTEM
+* **created_date** - date field when the row was created
+* **last_modified_by** - user name who last changed data in the row. Should default to SYSTEM
+* **last_modified_date** - date field when the data in the row was last changed
 
 Table Relationships include
 
