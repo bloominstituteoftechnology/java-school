@@ -1,5 +1,6 @@
 package com.lambdaschool.schools.services;
 
+import com.lambdaschool.schools.exceptions.ResourceNotFoundException;
 import com.lambdaschool.schools.models.Course;
 import com.lambdaschool.schools.models.Instructor;
 import com.lambdaschool.schools.models.StudCourses;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class CoursesServiceImpl
     public Course findCourseById(long id)
     {
         return courserepos.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Course id " + id + " not found!"));
+            .orElseThrow(() -> new ResourceNotFoundException("Course id " + id + " not found!"));
     }
 
     @Transactional
@@ -66,7 +66,7 @@ public class CoursesServiceImpl
     public void delete(long id)
     {
         courserepos.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Course id " + id + " not found!"));
+            .orElseThrow(() -> new ResourceNotFoundException("Course id " + id + " not found!"));
         courserepos.deleteById(id);
     }
 
@@ -79,7 +79,7 @@ public class CoursesServiceImpl
         if (course.getCourseid() != 0)
         {
             Course oldCourse = courserepos.findById(course.getCourseid())
-                .orElseThrow(() -> new EntityNotFoundException("Course id " + course.getCourseid() + " not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Course id " + course.getCourseid() + " not found!"));
 
             newCourse.setCourseid(course.getCourseid());
         }
@@ -87,7 +87,7 @@ public class CoursesServiceImpl
         newCourse.setCoursename(course.getCoursename());
         Instructor newInstructor = instructorrepos.findById(course.getInstructor()
             .getInstructorid())
-            .orElseThrow(() -> new EntityNotFoundException("Instructor id " + course.getInstructor()
+            .orElseThrow(() -> new ResourceNotFoundException("Instructor id " + course.getInstructor()
                 .getInstructorid() + " not found!"));
         newCourse.setInstructor(newInstructor);
 
@@ -97,7 +97,7 @@ public class CoursesServiceImpl
         {
             Student newStudent = studentrepos.findById(sc.getStudent()
                 .getStudentid())
-                .orElseThrow(() -> new EntityNotFoundException("Instructor id " + sc.getStudent()
+                .orElseThrow(() -> new ResourceNotFoundException("Instructor id " + sc.getStudent()
                     .getStudentid() + " not found!"));
 
             newCourse.getStudents()
