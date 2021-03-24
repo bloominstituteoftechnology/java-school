@@ -16,9 +16,18 @@ public class ErrorDetail {
 
     private String developerMessage;
 
-    private List<ValidationError>errors = new ArrayList<>();
+    private List<ValidationError> errors = new ArrayList<>();
 
     public ErrorDetail() {
+    }
+
+    public ErrorDetail(String title, int status, String detail, Date timestamp, String developerMessage, List<ValidationError> errors) {
+        this.title = title;
+        this.status = status;
+        this.detail = detail;
+        this.timestamp = timestamp;
+        this.developerMessage = developerMessage;
+        this.errors = errors;
     }
 
     public String getTitle() {

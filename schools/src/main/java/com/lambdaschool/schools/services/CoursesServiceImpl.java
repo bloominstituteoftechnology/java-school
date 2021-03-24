@@ -60,7 +60,7 @@ public class CoursesServiceImpl
     public Course findCourseById(long id)
     {
         return courserepos.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException()"Course id " + id + " not found!"));
+            .orElseThrow(() -> new ResourceNotFoundException("Course id " + id + " not found!"));
     }
 
     @Transactional
