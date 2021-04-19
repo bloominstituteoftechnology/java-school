@@ -16,7 +16,7 @@ public class ErrorDetail {
 
     private String developerMessage;
 
-    private List<ValidationError> validationError = new ArrayList<>();
+    private List<ValidationError> errors = new ArrayList<>();
 
     public ErrorDetail() {
     }
@@ -61,11 +61,11 @@ public class ErrorDetail {
         this.developerMessage = developerMessage;
     }
 
-    public List<ValidationError> getValidationError() {
-        return validationError;
+    public List<ValidationError> getErrors() {
+        return errors;
     }
 
-    public void setValidationError(List<ValidationError> validationError) {
-        this.validationError = validationError;
+    public void setErrors(List<ValidationError> errors) {
+        this.errors = errors;
     }
 }

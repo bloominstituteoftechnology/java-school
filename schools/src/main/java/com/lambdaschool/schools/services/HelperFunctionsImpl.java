@@ -12,7 +12,7 @@ import java.util.List;
 @Service(value = "helperFunctions")
 public class HelperFunctionsImpl implements HelperFunctions {
     @Override
-    public List<ValidationError> getConstraintViolation(Throwable cause) {
+    public List<ValidationError> getValidationErrors(Throwable cause) {
         List<ValidationError> validationErrorList = new ArrayList<>();
         // Find any data violations that might be associated with the error and report them
         // data validations get wrapped in other exceptions as we work through the Spring
@@ -49,4 +49,5 @@ public class HelperFunctionsImpl implements HelperFunctions {
         }
         return validationErrorList;
     }
+
 }

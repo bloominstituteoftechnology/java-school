@@ -9,15 +9,24 @@ public class ValidationError {
         return fieldname;
     }
 
-    public String getMessage() {
-        return message;
+    public ValidationError() {
+    }
+
+    public ValidationError(String fieldname, String message) {
+        this.fieldname = fieldname;
+        this.message = message;
     }
 
     public void setFieldname(String fieldname) {
         this.fieldname = fieldname;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
     public void setMessage(String message) {
         this.message = message;
     }
 }
+
