@@ -376,7 +376,7 @@ public&nbsp;<a href="../models/Zoo.html" title="class in com.lambdaschool.school
 <h4>delete</h4>
 <pre class="methodSignature">@Transactional
 public&nbsp;void&nbsp;delete&#8203;(long&nbsp;id)
-            throws javax.persistence.EntityNotFoundException</pre>
+            throws javax.persistence.ResourceNotFoundException</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="ZooService.html#delete(long)">ZooService</a></code></span></div>
 <div class="block">Deletes the course record, it student course combinations, and its telephone items from the database based off of the provided primary key</div>
 <dl>
@@ -385,7 +385,7 @@ public&nbsp;void&nbsp;delete&#8203;(long&nbsp;id)
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>id</code> - id The primary key (long) of the course you seek.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>javax.persistence.EntityNotFoundException</code></dd>
+<dd><code>javax.persistence.ResourceNotFoundException</code></dd>
 </dl>
 </li>
 </ul>
@@ -438,7 +438,7 @@ public&nbsp;void&nbsp;saveZooAnimalCombo&#8203;(long&nbsp;zooid,
 <li class="blockList">
 <h4>findZooByLikeName</h4>
 <pre class="methodSignature">public&nbsp;java.util.ArrayList&lt;<a href="../models/Zoo.html" title="class in com.lambdaschool.schools.models">Zoo</a>&gt;&nbsp;findZooByLikeName&#8203;(java.lang.String&nbsp;name)
-                                           throws javax.persistence.EntityNotFoundException</pre>
+                                           throws javax.persistence.ResourceNotFoundException</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="ZooService.html#findZooByLikeName(java.lang.String)">ZooService</a></code></span></div>
 <div class="block">A list of all zoos whose name contains the given substring
  A Stretch Goal</div>
@@ -450,7 +450,7 @@ public&nbsp;void&nbsp;saveZooAnimalCombo&#8203;(long&nbsp;zooid,
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>List of zoos whose name contains the given substring</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>javax.persistence.EntityNotFoundException</code></dd>
+<dd><code>javax.persistence.ResourceNotFoundException</code></dd>
 </dl>
 </li>
 </ul>
