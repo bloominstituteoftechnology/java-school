@@ -1,7 +1,12 @@
 package com.lambdaschool.schools.controllers;
 
+import com.lambdaschool.schools.models.ErrorDetail;
 import com.lambdaschool.schools.models.Student;
 import com.lambdaschool.schools.services.StudentService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,6 +39,7 @@ public class StudentController
      * @return JSON list of all students with a status of OK
      * @see StudentService#findAll() StudentService.findAll()
      */
+    @ApiOperation(value = "returns all students", response = Student.class, responseContainer = "List")
     @GetMapping(value = "/students",
         produces = {"application/json"})
     public ResponseEntity<?> listAllStudents()
@@ -51,9 +57,16 @@ public class StudentController
      * @return JSON object of the student you seek
      * @see StudentService#findStudentById(long) StudentService.findStudentById(long)
      */
+    @ApiOperation(value = "Returns a student by id", response = Student.class)
+    @ApiResponses(value = {@ApiResponse(code = 200,
+    message = "Student found",
+    response = Student.class), @ApiResponse(code = 404,
+    message = "Student not found",
+    response = ErrorDetail.class)})
     @GetMapping(value = "/student/{studentId}",
         produces = {"application/json"})
     public ResponseEntity<?> getStudentById(
+        @ApiParam(value = "Student id", required = true, example = "4")
         @PathVariable
             Long studentId)
     {

@@ -1,6 +1,8 @@
 package com.lambdaschool.schools.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +11,7 @@ import java.util.Set;
 /**
  * The Entity allowing interaction with the students table
  */
+@ApiModel(value = "Students,", description = "Student record")
 @Entity
 @Table(name = "students")
 public class Student
@@ -17,6 +20,7 @@ public class Student
     /**
      * The primary key (long) of the students table
      */
+    @ApiModelProperty(name = "student id", value = "primary key of student", required = true, example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long studentid;
@@ -24,6 +28,7 @@ public class Student
     /**
      * The name student (String)
      */
+    @ApiModelProperty(name = "Student name", value = "Students actual name", required = true, example = "Bucky Barnes")
     @Column(nullable = false,
         unique = true)
     private String name;
@@ -32,6 +37,7 @@ public class Student
      * Part of the join relationship between student and course
      * connects students to the student course combination
      */
+    @ApiModelProperty(name = "Student Classes", value = "name of the class", required = false, example = "Java Back End")
     @OneToMany(mappedBy = "student",
         cascade = CascadeType.ALL,
         orphanRemoval = true)

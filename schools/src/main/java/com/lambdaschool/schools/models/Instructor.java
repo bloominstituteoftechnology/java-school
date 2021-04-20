@@ -38,6 +38,9 @@ public class Instructor
         allowSetters = true)
     private List<Course> courses = new ArrayList<>();
 
+    @Transient
+    private String advice;
+
     /**
      * Default Constructor used primarily by the JPA.
      */
@@ -114,5 +117,15 @@ public class Instructor
     public void setCourses(List<Course> courses)
     {
         this.courses = courses;
+    }
+
+    public String getAdvice()
+    {
+        return advice;
+    }
+
+    public void setAdvice(String advice)
+    {
+        this.advice = advice;
     }
 }
