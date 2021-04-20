@@ -25,7 +25,7 @@ public class Course
     /**
      * Name (String) of this Course. Cannot be null and must be unique
      */
-    @Column(nullable = true,
+    @Column(nullable = false,
         unique = true)
     private String coursename;
 
