@@ -1,5 +1,6 @@
 package com.lambdaschool.schools.handlers;
 
+import com.lambdaschool.schools.exceptions.ResourceFoundException;
 import com.lambdaschool.schools.exceptions.ResourceNotFoundException;
 import com.lambdaschool.schools.models.ErrorDetail;
 import com.lambdaschool.schools.services.HelperFunctions;
@@ -24,6 +25,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     private HelperFunctions helperFunctions;
 
+    public RestExceptionHandler() {
+        super();
+    }
+
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ErrorDetail errorDetail = new ErrorDetail();
@@ -39,21 +44,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-
-    @Override
-    protected ResponseEntity<Object> handleMissingPathVariable(MissingPathVariableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ErrorDetail errorDetail = new ErrorDetail();
-
-        errorDetail.setTimestamp(new Date());
-        errorDetail.setTitle("Rest Internal Exception");
-        errorDetail.setStatus(status.value());
-        errorDetail.setDetail(ex.getMessage());
-        errorDetail.setDeveloperMessage(ex.getClass().getName());
-        errorDetail.setErrors(helperFunctions.getValidationErrors(ex));
-
-        return new ResponseEntity<>(errorDetail, null, status);
-    }
-
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException rnfe) {
         ErrorDetail errorDetail = new ErrorDetail();
@@ -66,5 +56,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         errorDetail.setErrors(helperFunctions.getValidationErrors(rnfe));
 
         return new ResponseEntity<>(errorDetail, null, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ResourceFoundException.class)
+    public ResponseEntity<?> handleResourceFoundException(ResourceNotFoundException rnfe) {
+        ErrorDetail errorDetail = new ErrorDetail();
+
+        errorDetail.setTimestamp(new Date());
+        errorDetail.setTitle("Unexpected Resource");
+        errorDetail.setStatus(HttpStatus.BAD_REQUEST.value());
+        errorDetail.setDetail(rnfe.getMessage());
+        errorDetail.setDeveloperMessage(rnfe.getClass().getName());
+        errorDetail.setErrors(helperFunctions.getValidationErrors(rnfe));
+
+        return new ResponseEntity<>(errorDetail, null, HttpStatus.BAD_REQUEST);
     }
 }
