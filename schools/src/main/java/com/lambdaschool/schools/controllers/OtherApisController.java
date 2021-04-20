@@ -53,6 +53,43 @@ public class OtherApisController
                                 HttpStatus.OK);
   }
 
+  @GetMapping(value = "/shakespeare/{englishText}")
+  public ResponseEntity<?> getTranslation(
+      @PathVariable
+          String englishText)
+  {
+    // we need to tell our RestTemplate what format to expect
+    MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+    // a couple of common formats
+    // converter.setSupportedMediaTypes(Collections.singletonList(MediaType.TEXT_HTML));
+    // converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
+    // or we can accept all formats! Easiest but least secure
+    converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+    restTemplate.getMessageConverters()
+                .add(converter);
+
+    // create the url to access the API including adding the path variable
+    String requestURL = "https://api.funtranslations.com/translate/shakespeare.json?text=" + englishText;
+    // create the responseType expected. Notice the Translation is the data type we are expecting back from the API!
+    ParameterizedTypeReference<Translation> responseType = new ParameterizedTypeReference<>()
+    {
+    };
+
+    // create the response entity. do the get and get back information
+    ResponseEntity<Translation> responseEntity = restTemplate.exchange(requestURL,
+                                                                       HttpMethod.GET,
+                                                                       null,
+                                                                       responseType);
+    // we want to return the contents of the translation data. From the data that gets returned in the body,
+    // get the contents data only and return it.
+    // putting the data into its own object first, prevents the data from being reported to client inside of
+    // an embedded. So the response will look more like our clients are use to!
+    TranslationContents ourTranslation = responseEntity.getBody()
+                                                       .getContents();
+    return new ResponseEntity<>(ourTranslation,
+                                HttpStatus.OK);
+  }
+
   @GetMapping(value = "/advice")
   public ResponseEntity<?> listSlipAdvice()
   {
@@ -86,10 +123,10 @@ public class OtherApisController
                                 HttpStatus.OK);
   }
 
-  @GetMapping(value = "/shakespeare/{englishText}")
-  public ResponseEntity<?> getTranslation(
+  @GetMapping(value = "/advice/{id}")
+  public ResponseEntity<?> getAdviceTranslation(
       @PathVariable
-          String englishText)
+          int id)
   {
     // we need to tell our RestTemplate what format to expect
     MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -102,7 +139,7 @@ public class OtherApisController
                 .add(converter);
 
     // create the url to access the API including adding the path variable
-    String requestURL = "https://api.funtranslations.com/translate/shakespeare.json?text=" + englishText;
+    String requestURL = "https://api.adviceslip.com/advice?text=" + id;
     // create the responseType expected. Notice the Translation is the data type we are expecting back from the API!
     ParameterizedTypeReference<Translation> responseType = new ParameterizedTypeReference<>()
     {

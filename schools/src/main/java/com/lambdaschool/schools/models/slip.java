@@ -1,15 +1,18 @@
 package com.lambdaschool.schools.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class slip {
 
-  private long id;
+  private int id;
   private String advice;
 
   public long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(int id) {
     this.id = id;
   }
 
