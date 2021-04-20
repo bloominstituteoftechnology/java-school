@@ -1,6 +1,7 @@
 package com.lambdaschool.schools.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,6 +25,10 @@ public class Instructor
     /**
      * The Instructor's name (String)
      */
+    @Length.List({
+            @Length(min = 2, message = "The field must be at least 2 characters"),
+            @Length(max = 30, message = "The field must be less than 30 characters")
+    })
     @Column(nullable = false)
     private String name;
 
