@@ -27,6 +27,8 @@ public class Instructor
     @Column(nullable = false)
     private String name;
 
+    @Transient
+    private String advice;
     /**
      * List of courses associated with this instructor. Does not get saved in the database directly.
      * Forms a one to many relationship with courses. One instructor to many courses.
