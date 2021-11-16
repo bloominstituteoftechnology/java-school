@@ -438,7 +438,7 @@ DATA
 
 ```JSON
 {
-    "coursename": "Lambda X",
+    "coursename": "BloomTech Labs",
     "instructor": {
         "instructorid": 3
     },
